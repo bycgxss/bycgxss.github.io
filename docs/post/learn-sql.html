@@ -24,14 +24,46 @@ drop database if exists `名称`;
 ```
 ### 改
 ```sql
-alter database `名称` character set 字符集 collate 排序规则
+alter database `名称` character set 字符集 collate 排序规则;
 ```
 ### 查
 ```sql
 show databases;
-select database();
+show tables from `库名`;
 use `库名`;
+select database();
 show create database `库名`\G;
+```
+
+## 表操作
+### 增
+```sql
+create table if not exists `表名` (
+  列名 列类型 [列可选约束] [comment `列可选注释`],
+  列名 列类型 [列可选约束] [comment `列可选注释`]
+) [表可选约束] [comment `表可选注释`];
+```
+### 删
+```sql
+drop table if exists `表名`;
+```
+### 改
+```sql
+# 修改表名
+alter table `表名` rename `新表名`;
+# 新增列
+alter table `表名` add `列名` 列类型 [列可选约束] [first | after 列名] [comment 列可选注释];
+# 删除列
+alter table `表名` drop `列名`;
+# 改列名
+alter table `表名` change `列名` `新列名` [first | after 列名];
+# 改列类型
+alter table `表名` modify 列类型 [列可选约束] [first | after 列名];
+```
+### 查
+```sql
+desc `表名`;
+show create table `表名`\G;
 ```。">
 <meta property="og:title" content="learn-sql">
 <meta property="og:description" content="## 库操作
@@ -48,14 +80,46 @@ drop database if exists `名称`;
 ```
 ### 改
 ```sql
-alter database `名称` character set 字符集 collate 排序规则
+alter database `名称` character set 字符集 collate 排序规则;
 ```
 ### 查
 ```sql
 show databases;
-select database();
+show tables from `库名`;
 use `库名`;
+select database();
 show create database `库名`\G;
+```
+
+## 表操作
+### 增
+```sql
+create table if not exists `表名` (
+  列名 列类型 [列可选约束] [comment `列可选注释`],
+  列名 列类型 [列可选约束] [comment `列可选注释`]
+) [表可选约束] [comment `表可选注释`];
+```
+### 删
+```sql
+drop table if exists `表名`;
+```
+### 改
+```sql
+# 修改表名
+alter table `表名` rename `新表名`;
+# 新增列
+alter table `表名` add `列名` 列类型 [列可选约束] [first | after 列名] [comment 列可选注释];
+# 删除列
+alter table `表名` drop `列名`;
+# 改列名
+alter table `表名` change `列名` `新列名` [first | after 列名];
+# 改列类型
+alter table `表名` modify 列类型 [列可选约束] [first | after 列名];
+```
+### 查
+```sql
+desc `表名`;
+show create table `表名`\G;
 ```。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://bycgxss.github.io/post/learn-sql.html">
@@ -136,12 +200,35 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="highlight highlight-source-sql"><pre class="notranslate"><span class="pl-k">drop</span> <span class="pl-k">database</span> <span class="pl-s"><span class="pl-pds">`</span>名称<span class="pl-pds">`</span></span>;
 <span class="pl-k">drop</span> <span class="pl-k">database</span> if exists <span class="pl-s"><span class="pl-pds">`</span>名称<span class="pl-pds">`</span></span>;</pre></div>
 <h3>改</h3>
-<div class="highlight highlight-source-sql"><pre class="notranslate"><span class="pl-k">alter</span> <span class="pl-k">database</span> <span class="pl-s"><span class="pl-pds">`</span>名称<span class="pl-pds">`</span></span> character <span class="pl-k">set</span> 字符集 collate 排序规则</pre></div>
+<div class="highlight highlight-source-sql"><pre class="notranslate"><span class="pl-k">alter</span> <span class="pl-k">database</span> <span class="pl-s"><span class="pl-pds">`</span>名称<span class="pl-pds">`</span></span> character <span class="pl-k">set</span> 字符集 collate 排序规则;</pre></div>
 <h3>查</h3>
 <div class="highlight highlight-source-sql"><pre class="notranslate">show databases;
-<span class="pl-k">select</span> database();
+show tables <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">`</span>库名<span class="pl-pds">`</span></span>;
 use <span class="pl-s"><span class="pl-pds">`</span>库名<span class="pl-pds">`</span></span>;
-show create database <span class="pl-s"><span class="pl-pds">`</span>库名<span class="pl-pds">`</span></span>\G;</pre></div></div>
+<span class="pl-k">select</span> database();
+show create database <span class="pl-s"><span class="pl-pds">`</span>库名<span class="pl-pds">`</span></span>\G;</pre></div>
+<h2>表操作</h2>
+<h3>增</h3>
+<div class="highlight highlight-source-sql"><pre class="notranslate"><span class="pl-k">create</span> <span class="pl-k">table</span> <span class="pl-en">if</span> not exists <span class="pl-s"><span class="pl-pds">`</span>表名<span class="pl-pds">`</span></span> (
+  列名 列类型 [列可选约束] [comment <span class="pl-s"><span class="pl-pds">`</span>列可选注释<span class="pl-pds">`</span></span>],
+  列名 列类型 [列可选约束] [comment <span class="pl-s"><span class="pl-pds">`</span>列可选注释<span class="pl-pds">`</span></span>]
+) [表可选约束] [comment <span class="pl-s"><span class="pl-pds">`</span>表可选注释<span class="pl-pds">`</span></span>];</pre></div>
+<h3>删</h3>
+<div class="highlight highlight-source-sql"><pre class="notranslate"><span class="pl-k">drop</span> <span class="pl-k">table</span> if exists <span class="pl-s"><span class="pl-pds">`</span>表名<span class="pl-pds">`</span></span>;</pre></div>
+<h3>改</h3>
+<div class="highlight highlight-source-sql"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 修改表名</span>
+<span class="pl-k">alter</span> <span class="pl-k">table</span> <span class="pl-s"><span class="pl-pds">`</span>表名<span class="pl-pds">`</span></span> rename <span class="pl-s"><span class="pl-pds">`</span>新表名<span class="pl-pds">`</span></span>;
+<span class="pl-c"><span class="pl-c">#</span> 新增列</span>
+<span class="pl-k">alter</span> <span class="pl-k">table</span> <span class="pl-s"><span class="pl-pds">`</span>表名<span class="pl-pds">`</span></span> add <span class="pl-s"><span class="pl-pds">`</span>列名<span class="pl-pds">`</span></span> 列类型 [列可选约束] [first | after 列名] [comment 列可选注释];
+<span class="pl-c"><span class="pl-c">#</span> 删除列</span>
+<span class="pl-k">alter</span> <span class="pl-k">table</span> <span class="pl-s"><span class="pl-pds">`</span>表名<span class="pl-pds">`</span></span> drop <span class="pl-s"><span class="pl-pds">`</span>列名<span class="pl-pds">`</span></span>;
+<span class="pl-c"><span class="pl-c">#</span> 改列名</span>
+<span class="pl-k">alter</span> <span class="pl-k">table</span> <span class="pl-s"><span class="pl-pds">`</span>表名<span class="pl-pds">`</span></span> change <span class="pl-s"><span class="pl-pds">`</span>列名<span class="pl-pds">`</span></span> <span class="pl-s"><span class="pl-pds">`</span>新列名<span class="pl-pds">`</span></span> [first | after 列名];
+<span class="pl-c"><span class="pl-c">#</span> 改列类型</span>
+<span class="pl-k">alter</span> <span class="pl-k">table</span> <span class="pl-s"><span class="pl-pds">`</span>表名<span class="pl-pds">`</span></span> modify 列类型 [列可选约束] [first | after 列名];</pre></div>
+<h3>查</h3>
+<div class="highlight highlight-source-sql"><pre class="notranslate"><span class="pl-k">desc</span> <span class="pl-s"><span class="pl-pds">`</span>表名<span class="pl-pds">`</span></span>;
+show create table <span class="pl-s"><span class="pl-pds">`</span>表名<span class="pl-pds">`</span></span>\G;</pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
