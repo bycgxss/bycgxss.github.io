@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Bycgxss Blog</title><link>https://bycgxss.github.io</link><description>永远相信美好的事情即将发生</description><copyright>Bycgxss Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://bycgxss.github.io</link></image><lastBuildDate>Fri, 01 Nov 2024 06:51:44 +0000</lastBuildDate><managingEditor>Bycgxss Blog</managingEditor><ttl>60</ttl><webMaster>Bycgxss Blog</webMaster><item><title>learn-sql</title><link>https://bycgxss.github.io/post/learn-sql.html</link><description>## 库操作&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Bycgxss Blog</title><link>https://bycgxss.github.io</link><description>永远相信美好的事情即将发生</description><copyright>Bycgxss Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://bycgxss.github.io</link></image><lastBuildDate>Fri, 01 Nov 2024 07:12:31 +0000</lastBuildDate><managingEditor>Bycgxss Blog</managingEditor><ttl>60</ttl><webMaster>Bycgxss Blog</webMaster><item><title>常用sql语句</title><link>https://bycgxss.github.io/post/chang-yong-sql-yu-ju.html</link><description>## 库操作&#13;
 ### 增&#13;
 ```sql&#13;
 create database `名称`;&#13;
@@ -53,7 +53,30 @@ alter table `表名` modify 列类型 [列可选约束] [first | after 列名];&
 ```sql&#13;
 desc `表名`;&#13;
 show create table `表名`\G;&#13;
-```。</description><guid isPermaLink="true">https://bycgxss.github.io/post/learn-sql.html</guid><pubDate>Fri, 01 Nov 2024 02:31:31 +0000</pubDate></item><item><title>MYSQL-DDL</title><link>https://bycgxss.github.io/post/MYSQL-DDL.html</link><description>## 库管理&#13;
+```&#13;
+&#13;
+## 表数据操作&#13;
+### 增&#13;
+```sql&#13;
+insert into `表名` (列名1, 列名2, 列名3) values&#13;
+  (列1值, 列2值, 列3值),&#13;
+  (列1值, 列2值, 列3值),&#13;
+  (列1值, 列2值, 列3值);&#13;
+```&#13;
+### 删&#13;
+```sql&#13;
+delete from `表名` where 条件; # 省略 where 条件 将会删除表中所有数据&#13;
+```&#13;
+### 改&#13;
+```sql&#13;
+update `表名` set 列名1 = 列值1, 列名2 = 列值2 where 条件; # 省略 where 条件 将会更新表中所有数据&#13;
+```&#13;
+### 查&#13;
+```sql&#13;
+# 简单查询&#13;
+select * from `表名`;&#13;
+select 列名1, 列名2 from `表名` [可选条件];&#13;
+```。</description><guid isPermaLink="true">https://bycgxss.github.io/post/chang-yong-sql-yu-ju.html</guid><pubDate>Fri, 01 Nov 2024 02:31:31 +0000</pubDate></item><item><title>MYSQL-DDL</title><link>https://bycgxss.github.io/post/MYSQL-DDL.html</link><description>## 库管理&#13;
 &#13;
 ### 创建&#13;
 ```sql&#13;
