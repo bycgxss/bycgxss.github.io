@@ -14,135 +14,95 @@
 ### 明确类型声明
 ```dart
 void main() {
-  String name = 'John';
-  String n;
-  n = 'xxx';
-  print(name);
+  String s = 'John'; // 声明并给定初始值
+  String s1; // 声明后赋值
+  s1 = 'xxx';
 }
 ```
-### var(自动推导)
+### Object类型声明
 ```dart
 void main() {
-  var a = 'xxx'; // 变量a被推导为String类型
-  a = 1; // error，一旦确认类型，不可更改
+  Object a = 'xxx'; // 可以是除null以外的任意类型的值
+  a = 1;
+  a.xxx(); // error，只能访问Object类型定义的属性和方法
 }
 ```
+### var关键字
 ```dart
 void main() {
-  var a; // 变量a声明时未初始化，将等同于dynamic
+  var s = 'xxx'; // 根据初始化自动推导类型
+  s = 1; // error，一旦确认类型，不可更改其类型
+
+  var a; // 声明时未初始化，将等同于使用dynamic声明
   a = 1;
   a = 'xxx;
 }
 ```
-
-### Object类型声明
+### dynamic关键字
 ```dart
 void main() {
-  Object a = 'xxx';
-  a = 1; // 变量a可以为任意类型，以为Object是所有类型的基类
-  a.xxx(); // error，只能访问Object类型自身的属性或方法
-  (a as int).abs(); // 当你确定该变量类型时，可以用类型断言，注意，有可能引发运行时异常
-}
-```
-
-### dynamic
-```dart
-void main() {
-  dynamic a = true;  // dynamic声明的变量可以为任意值，包括null
+  // 可以为任意类型的值，包括null，默认值为null
+  // 访问任意属性和方法都可以通过编译，可能会造成运行时异常
+  dynamic a;
   a = 1;
   a = '1';
-  print(a.xxx); // 且调用属性和方法会绕过静态类型检查
-  print(a.xxx());
+  a.xxx()
+  print(a.xxx);
 }
 ```
 
 ---
 
 ## 空安全
-> 在dart2.12中引入了空安全特性，意味着所有类型都是非空的（即不可为null），除非显示的指定为可空类型
-> 对一个非空类型的变量，在其初始化之前进行访问，会在编译阶段抛出异常
-> 对一个可空类型的变量进行属性或方法调用前，请添加空检查判断
-```dart
-class Person {
-  void say() {
-    print('say');
-  }
-}
-
-void main() {
-  String s;
-  print(s); // 编译报错，non-nullable，非空变量使用前必须初始化
-
-  Person? p;
-  p.say(); // 编译报错，变量有可能为null
-  p!.say(); // 空断言，告诉编译器，变量p这里肯定不是空。">
+- 是什么
+  - 空安全是 Dart 2.12 版本引入的一个重要特性，它帮助开发者在编译时就能够发现潜在的空引用错误，而不是在运行时才发现。">
 <meta property="og:title" content="dart-变量">
 <meta property="og:description" content="## 变量声明
 ### 明确类型声明
 ```dart
 void main() {
-  String name = 'John';
-  String n;
-  n = 'xxx';
-  print(name);
+  String s = 'John'; // 声明并给定初始值
+  String s1; // 声明后赋值
+  s1 = 'xxx';
 }
 ```
-### var(自动推导)
+### Object类型声明
 ```dart
 void main() {
-  var a = 'xxx'; // 变量a被推导为String类型
-  a = 1; // error，一旦确认类型，不可更改
+  Object a = 'xxx'; // 可以是除null以外的任意类型的值
+  a = 1;
+  a.xxx(); // error，只能访问Object类型定义的属性和方法
 }
 ```
+### var关键字
 ```dart
 void main() {
-  var a; // 变量a声明时未初始化，将等同于dynamic
+  var s = 'xxx'; // 根据初始化自动推导类型
+  s = 1; // error，一旦确认类型，不可更改其类型
+
+  var a; // 声明时未初始化，将等同于使用dynamic声明
   a = 1;
   a = 'xxx;
 }
 ```
-
-### Object类型声明
+### dynamic关键字
 ```dart
 void main() {
-  Object a = 'xxx';
-  a = 1; // 变量a可以为任意类型，以为Object是所有类型的基类
-  a.xxx(); // error，只能访问Object类型自身的属性或方法
-  (a as int).abs(); // 当你确定该变量类型时，可以用类型断言，注意，有可能引发运行时异常
-}
-```
-
-### dynamic
-```dart
-void main() {
-  dynamic a = true;  // dynamic声明的变量可以为任意值，包括null
+  // 可以为任意类型的值，包括null，默认值为null
+  // 访问任意属性和方法都可以通过编译，可能会造成运行时异常
+  dynamic a;
   a = 1;
   a = '1';
-  print(a.xxx); // 且调用属性和方法会绕过静态类型检查
-  print(a.xxx());
+  a.xxx()
+  print(a.xxx);
 }
 ```
 
 ---
 
 ## 空安全
-> 在dart2.12中引入了空安全特性，意味着所有类型都是非空的（即不可为null），除非显示的指定为可空类型
-> 对一个非空类型的变量，在其初始化之前进行访问，会在编译阶段抛出异常
-> 对一个可空类型的变量进行属性或方法调用前，请添加空检查判断
-```dart
-class Person {
-  void say() {
-    print('say');
-  }
-}
-
-void main() {
-  String s;
-  print(s); // 编译报错，non-nullable，非空变量使用前必须初始化
-
-  Person? p;
-  p.say(); // 编译报错，变量有可能为null
-  p!.say(); // 空断言，告诉编译器，变量p这里肯定不是空。">
+- 是什么
+  - 空安全是 Dart 2.12 版本引入的一个重要特性，它帮助开发者在编译时就能够发现潜在的空引用错误，而不是在运行时才发现。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://bycgxss.github.io/post/dart--bian-liang.html">
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
@@ -216,56 +176,153 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="markdown-body" id="postBody"><h2>变量声明</h2>
 <h3>明确类型声明</h3>
 <div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">main</span>() {
-  <span class="pl-c1">String</span> name <span class="pl-k">=</span> <span class="pl-s">'John'</span>;
-  <span class="pl-c1">String</span> n;
-  n <span class="pl-k">=</span> <span class="pl-s">"xxx"</span>;
-  <span class="pl-en">print</span>(name);
+  <span class="pl-c1">String</span> s <span class="pl-k">=</span> <span class="pl-s">'John'</span>; <span class="pl-c">// 声明并给定初始值</span>
+  <span class="pl-c1">String</span> s1; <span class="pl-c">// 声明后赋值</span>
+  s1 <span class="pl-k">=</span> <span class="pl-s">"xxx"</span>;
 }</pre></div>
-<h3>var(自动推导)</h3>
+<h3>Object类型声明</h3>
 <div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">main</span>() {
-  <span class="pl-k">var</span> a <span class="pl-k">=</span> <span class="pl-s">'xxx'</span>; <span class="pl-c">// 变量a被推导为String类型</span>
-  a <span class="pl-k">=</span> <span class="pl-c1">1</span>; <span class="pl-c">// error，一旦确认类型，不可更改</span>
+  <span class="pl-c1">Object</span> a <span class="pl-k">=</span> <span class="pl-s">'xxx'</span>; <span class="pl-c">// 可以是除null以外的任意类型的值</span>
+  a <span class="pl-k">=</span> <span class="pl-c1">1</span>;
+  a.<span class="pl-en">xxx</span>(); <span class="pl-c">// error，只能访问Object类型定义的属性和方法</span>
 }</pre></div>
+<h3>var关键字</h3>
 <div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">main</span>() {
-  <span class="pl-k">var</span> a; <span class="pl-c">// 变量a声明时未初始化，将等同于dynamic</span>
+  <span class="pl-k">var</span> s <span class="pl-k">=</span> <span class="pl-s">'xxx'</span>; <span class="pl-c">// 根据初始化自动推导类型</span>
+  s <span class="pl-k">=</span> <span class="pl-c1">1</span>; <span class="pl-c">// error，一旦确认类型，不可更改其类型</span>
+
+  <span class="pl-k">var</span> a; <span class="pl-c">// 声明时未初始化，将等同于使用dynamic声明</span>
   a <span class="pl-k">=</span> <span class="pl-c1">1</span>;
   a <span class="pl-k">=</span> <span class="pl-s">'xxx;</span>
 <span class="pl-s">}</span></pre></div>
-<h3>Object类型声明</h3>
+<h3>dynamic关键字</h3>
 <div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">main</span>() {
-  <span class="pl-c1">Object</span> a <span class="pl-k">=</span> <span class="pl-s">'xxx'</span>;
-  a <span class="pl-k">=</span> <span class="pl-c1">1</span>; <span class="pl-c">// 变量a可以为任意类型，以为Object是所有类型的基类</span>
-  a.<span class="pl-en">xxx</span>(); <span class="pl-c">// error，只能访问Object类型自身的属性或方法</span>
-  (a <span class="pl-k">as</span> <span class="pl-c1">int</span>).<span class="pl-en">abs</span>(); <span class="pl-c">// 当你确定该变量类型时，可以用类型断言，注意，有可能引发运行时异常</span>
-}</pre></div>
-<h3>dynamic</h3>
-<div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">main</span>() {
-  <span class="pl-c1">dynamic</span> a <span class="pl-k">=</span> <span class="pl-c1">true</span>;  <span class="pl-c">// dynamic声明的变量可以为任意值，包括null</span>
+  <span class="pl-c">// 可以为任意类型的值，包括null，默认值为null</span>
+  <span class="pl-c">// 访问任意属性和方法都可以通过编译，可能会造成运行时异常</span>
+  <span class="pl-c1">dynamic</span> a;
   a <span class="pl-k">=</span> <span class="pl-c1">1</span>;
   a <span class="pl-k">=</span> <span class="pl-s">'1'</span>;
-  <span class="pl-en">print</span>(a.xxx); <span class="pl-c">// 且调用属性和方法会绕过静态类型检查</span>
-  <span class="pl-en">print</span>(a.<span class="pl-en">xxx</span>());
+  a.<span class="pl-en">xxx</span>()
+  <span class="pl-en">print</span>(a.xxx);
 }</pre></div>
 <hr>
 <h2>空安全</h2>
-<blockquote>
-<p>在dart2.12中引入了空安全特性，意味着所有类型都是非空的（即不可为null），除非显示的指定为可空类型<br>
-对一个非空类型的变量，在其初始化之前进行访问，会在编译阶段抛出异常<br>
-对一个可空类型的变量进行属性或方法调用前，请添加空检查判断</p>
-</blockquote>
+<ul>
+<li>
+<p>是什么</p>
+<ul>
+<li>空安全是 Dart 2.12 版本引入的一个重要特性，它帮助开发者在编译时就能够发现潜在的空引用错误，而不是在运行时才发现。</li>
+</ul>
+</li>
+<li>
+<p>有什么用</p>
+<ul>
+<li>防止空引用异常：避免最常见的 NullPointerException 错误</li>
+<li>提高代码质量：使代码更加健壮和可维护</li>
+<li>提升开发效率：在编译时就能发现问题</li>
+</ul>
+</li>
+<li>
+<p>代码体现</p>
+</li>
+</ul>
+<div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">main</span>() {
+  <span class="pl-c">// dart默认启用空安全，意味着一个不可空变量必须赋值后才可访问</span>
+  <span class="pl-c1">String</span> s <span class="pl-k">=</span> <span class="pl-s">'xxx'</span>;
+
+  <span class="pl-c">// 你可以显式的指定一个变量为可空变量</span>
+  <span class="pl-c1">String</span><span class="pl-k">?</span> s1;
+  <span class="pl-c">// 不能无条件的访问一个可空变量的属性或方法，可以添加空检查判断</span>
+  s1<span class="pl-k">?</span>.<span class="pl-en">toLowerCase</span>(); <span class="pl-c">// 条件访问，不为null时调用，否则返回null</span>
+  s1<span class="pl-k">!</span>.<span class="pl-en">toLowerCase</span>(); <span class="pl-c">// 非空断言，认定该变量这时一定不为null。如果为null，则会造成运行时错误</span>
+}</pre></div>
+<hr>
+<h2>late（延迟变量）</h2>
+<p>对于不可空变量而言，Dart可以检测到在使用之前何时将其赋过值，但有两个例外情况，dart无法检测</p>
+<ul>
+<li>顶层变量</li>
+</ul>
+<div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-c1">String</span> name <span class="pl-k">=</span> <span class="pl-s">'xxx'</span>; <span class="pl-c">// 顶层变量，声明时必须给定初始值</span>
+<span class="pl-k">late</span> <span class="pl-c1">int</span> age; <span class="pl-c">// 无法在声明时确定值，可以添加late关键字</span>
+<span class="pl-k">void</span> <span class="pl-en">main</span>() {
+  <span class="pl-en">print</span>(name);
+  <span class="pl-en">print</span>(age); <span class="pl-c">// error，使用时未赋值，则会造成运行时异常</span>
+}</pre></div>
+<ul>
+<li>实例属性</li>
+</ul>
 <div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-k">class</span> <span class="pl-c1">Person</span> {
-  <span class="pl-k">void</span> <span class="pl-en">say</span>() {
-    <span class="pl-en">print</span>(<span class="pl-s">"say"</span>);
-  }
+  <span class="pl-c1">String</span> name <span class="pl-k">=</span> <span class="pl-s">'xxx'</span>; <span class="pl-c">// 实例变量，声明时必须给定初始值</span>
+  <span class="pl-k">late</span> <span class="pl-c1">int</span> age; <span class="pl-c">// 无法在声明时确定值，可以添加late关键字</span>
+}
+<span class="pl-k">void</span> <span class="pl-en">main</span>() {
+  <span class="pl-c1">Person</span> p <span class="pl-k">=</span> <span class="pl-c1">Person</span>();
+  <span class="pl-en">print</span>(p.name);
+  <span class="pl-en">print</span>(p.age); <span class="pl-c">// error，使用时未赋值，则会造成运行时异常</span>
+}</pre></div>
+<p>late变量、顶层变量、实例属性只会在使用时才会初始化</p>
+<div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-c1">String</span> <span class="pl-en">getName</span>() {
+  <span class="pl-en">print</span>(<span class="pl-s">"getName"</span>);
+  <span class="pl-k">return</span> <span class="pl-s">'xxx'</span>;
+}
+<span class="pl-c1">int</span> <span class="pl-en">getAge</span>() {
+  <span class="pl-en">print</span>(<span class="pl-s">"getAge"</span>);
+  <span class="pl-k">return</span> <span class="pl-c1">1</span>;
 }
 
-<span class="pl-k">void</span> <span class="pl-en">main</span>() {
-  <span class="pl-c1">String</span> s;
-  <span class="pl-en">print</span>(s); <span class="pl-c">// 编译报错，non-nullable，非空变量使用前必须初始化</span>
+<span class="pl-c1">String</span> <span class="pl-en">getHobby</span>() {
+  <span class="pl-en">print</span>(<span class="pl-s">"getHobby"</span>);
+  <span class="pl-k">return</span> <span class="pl-s">'唱跳rap'</span>;
+}
 
-  <span class="pl-c1">Person</span><span class="pl-k">?</span> p;
-  p.<span class="pl-en">say</span>(); <span class="pl-c">// 编译报错，变量有可能为null</span>
-  p<span class="pl-k">!</span>.<span class="pl-en">say</span>(); <span class="pl-c">// 空断言，告诉编译器，变量p这里肯定不是空。有可能发生运行时异常</span>
+<span class="pl-c1">String</span> name <span class="pl-k">=</span> <span class="pl-en">getName</span>();
+<span class="pl-k">late</span> <span class="pl-c1">int</span> age <span class="pl-k">=</span> <span class="pl-en">getAge</span>();
+
+<span class="pl-k">void</span> <span class="pl-en">main</span>() {
+  <span class="pl-k">late</span> <span class="pl-c1">String</span> hobby <span class="pl-k">=</span> <span class="pl-en">getHobby</span>();
+  <span class="pl-en">print</span>(<span class="pl-s">'start'</span>);
+  <span class="pl-en">print</span>(hobby);
+  <span class="pl-en">print</span>(name);
+  <span class="pl-en">print</span>(age); 
+  <span class="pl-en">print</span>(<span class="pl-s">'end'</span>);
+}</pre></div>
+<hr>
+<h2>常量</h2>
+<p>const、final关键字都用于声明常量</p>
+<ul>
+<li>常量只能被赋值一次，不可更改引用</li>
+</ul>
+<div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">main</span>() {
+  <span class="pl-k">final</span> <span class="pl-c1">String</span> hobby;
+  hobby <span class="pl-k">=</span> <span class="pl-s">'唱跳rap'</span>;
+  hobby <span class="pl-k">=</span> <span class="pl-s">'篮球'</span>; <span class="pl-c">// error</span>
+
+  <span class="pl-k">const</span> name <span class="pl-k">=</span> <span class="pl-s">'xxx'</span>; <span class="pl-c">// 可省略类型，自动推导</span>
+  name <span class="pl-k">=</span> <span class="pl-s">'yyy'</span>; <span class="pl-c">// error</span>
+}</pre></div>
+<ul>
+<li>const只能声明编译器常量</li>
+</ul>
+<div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">main</span>() {
+  <span class="pl-k">final</span> <span class="pl-c1">String</span> time <span class="pl-k">=</span> <span class="pl-c1">DateTime</span>.<span class="pl-en">now</span>().<span class="pl-en">toString</span>();
+  <span class="pl-k">const</span> name <span class="pl-k">=</span> <span class="pl-c1">DateTime</span>.<span class="pl-en">now</span>().<span class="pl-en">toString</span>(); <span class="pl-c">// error</span>
+}</pre></div>
+<ul>
+<li>const作用在类上时，需要加上static关键字</li>
+</ul>
+<div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-k">class</span> <span class="pl-c1">Person</span> {
+  <span class="pl-k">static</span> <span class="pl-k">const</span> <span class="pl-c1">String</span> name <span class="pl-k">=</span> <span class="pl-s">'xxx'</span>; <span class="pl-c">// const是编译期常量，如果不加static关键字，实例还未创建，属性如何确认值</span>
+}</pre></div>
+<ul>
+<li>const还可用于创建常量值，常量值不可被修改，只在内存里存在一份</li>
+</ul>
+<div class="highlight highlight-source-dart"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">main</span>() {
+  <span class="pl-k">var</span> a <span class="pl-k">=</span> <span class="pl-k">const</span> [<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>];
+  <span class="pl-k">var</span> b <span class="pl-k">=</span> <span class="pl-k">const</span> [<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>];
+  <span class="pl-k">var</span> c <span class="pl-k">=</span> [<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>];
+  <span class="pl-en">print</span>(a <span class="pl-k">==</span> b); <span class="pl-c">// true</span>
+  <span class="pl-en">print</span>(a <span class="pl-k">==</span> c); <span class="pl-c">// false</span>
+  a[<span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-c1">4</span>; <span class="pl-c">// runtime error，</span>
 }</pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
